@@ -96,6 +96,7 @@ class ViewController: UIViewController {
             _orientation = "画面が下向き"
         }
     }
+    //aaa
     
     //モーション通知時の処理
     func updateMotion(motion: CMDeviceMotion) {
