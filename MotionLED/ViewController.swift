@@ -30,7 +30,7 @@ class ViewController: UIViewController {
     var _aZMin: Float = 0
     
     
-    var _orientation: String = "1"
+    var _orientation: String = "12"
     
     //====================
     //UI
