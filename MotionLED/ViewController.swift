@@ -38,10 +38,10 @@ class ViewController: UIViewController ,UITableViewDelegate{
     
     var _colorChangeView:UIViewController?
     
-    var _colorMove_Letf:UIColor!
-    var _colorMove_Right:UIColor!
-    var _colorMove_Up:UIColor!
-    var _colorMove_Down:UIColor!
+    var _color_MoveLetf :UIColor!
+    var _color_MoveRight:UIColor!
+    var _color_MoveUp   :UIColor!
+    var _color_MoveDown :UIColor!
     
     struct Color {
         
@@ -248,9 +248,9 @@ class ViewController: UIViewController ,UITableViewDelegate{
         //        print("Y軸加速度:%+.2f\n", _aY)
         //        print("Z軸加速度:%+.2f\n", _aZ)
         
-        label1.text = "X軸加速度:" + String(NSString(format: "%.2f", _aX))
-        label2.text = "Y軸加速度:" + String(NSString(format: "%.2f", _aY))
-        label3.text = "Z軸加速度:" + String(NSString(format: "%.2f", _aZ))
+        label1.text = "X軸:" + String(NSString(format: "%.2f", _aX))
+        label2.text = "Y軸:" + String(NSString(format: "%.2f", _aY))
+        label3.text = "Z軸:" + String(NSString(format: "%.2f", _aZ))
         
         self.changeColor()
         

@@ -9,21 +9,21 @@
 /* Begin PBXBuildFile section */
 		3DD15DCA1C6E5F0600593A0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD15DC91C6E5F0600593A0D /* AppDelegate.swift */; };
 		3DD15DCC1C6E5F0600593A0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD15DCB1C6E5F0600593A0D /* ViewController.swift */; };
-		3DD15DCF1C6E5F0600593A0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DD15DCD1C6E5F0600593A0D /* Main.storyboard */; };
 		3DD15DD11C6E5F0600593A0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DD15DD01C6E5F0600593A0D /* Assets.xcassets */; };
 		3DD15DD41C6E5F0600593A0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DD15DD21C6E5F0600593A0D /* LaunchScreen.storyboard */; };
 		3DD15DDC1C6E5F5200593A0D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD15DDB1C6E5F5200593A0D /* CoreMotion.framework */; };
+		3DD15DDE1C77D53500593A0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DD15DDD1C77D53500593A0D /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3DD15DC61C6E5F0600593A0D /* MotionLED.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MotionLED.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DD15DC91C6E5F0600593A0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DD15DCB1C6E5F0600593A0D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		3DD15DCE1C6E5F0600593A0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3DD15DD01C6E5F0600593A0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3DD15DD31C6E5F0600593A0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3DD15DD51C6E5F0600593A0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DD15DDB1C6E5F5200593A0D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		3DD15DDD1C77D53500593A0D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +60,7 @@
 			children = (
 				3DD15DC91C6E5F0600593A0D /* AppDelegate.swift */,
 				3DD15DCB1C6E5F0600593A0D /* ViewController.swift */,
-				3DD15DCD1C6E5F0600593A0D /* Main.storyboard */,
+				3DD15DDD1C77D53500593A0D /* Main.storyboard */,
 				3DD15DD01C6E5F0600593A0D /* Assets.xcassets */,
 				3DD15DD21C6E5F0600593A0D /* LaunchScreen.storyboard */,
 				3DD15DD51C6E5F0600593A0D /* Info.plist */,
@@ -129,7 +129,7 @@
 			files = (
 				3DD15DD41C6E5F0600593A0D /* LaunchScreen.storyboard in Resources */,
 				3DD15DD11C6E5F0600593A0D /* Assets.xcassets in Resources */,
-				3DD15DCF1C6E5F0600593A0D /* Main.storyboard in Resources */,
+				3DD15DDE1C77D53500593A0D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,14 +148,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		3DD15DCD1C6E5F0600593A0D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3DD15DCE1C6E5F0600593A0D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		3DD15DD21C6E5F0600593A0D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -293,6 +285,7 @@
 				3DD15DDA1C6E5F0600593A0D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
