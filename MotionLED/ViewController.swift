@@ -18,6 +18,7 @@ class ViewController: UIViewController ,UITableViewDelegate{
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var label_demoScreen: UILabel!
     //MARK:定数
     let FILTERING_FACTOR: Float = 0.1
     
@@ -52,6 +53,17 @@ class ViewController: UIViewController ,UITableViewDelegate{
     }
     
     var _newColor = Color()
+    
+    @IBAction func action_ColorChange(sender: UIButton) {
+        switch sender.tag {
+        case 0,1,2,3,4:
+            print("")
+        default:
+            print("No matching Button")
+            
+        }
+        
+    }
     
     @IBAction func actionSW_Gravity(sender: UISwitch) {
         if sender.on {
