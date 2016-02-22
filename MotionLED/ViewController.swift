@@ -19,6 +19,7 @@ class ViewController: UIViewController ,UITableViewDelegate{
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var label_demoScreen: UILabel!
+    
     //MARK:定数
     let FILTERING_FACTOR: Float = 0.1
     
@@ -39,25 +40,35 @@ class ViewController: UIViewController ,UITableViewDelegate{
     
     var _colorChangeView:UIViewController?
     
-    var _color_MoveLetf :UIColor!
-    var _color_MoveRight:UIColor!
-    var _color_MoveUp   :UIColor!
-    var _color_MoveDown :UIColor!
     
-    struct Color {
-        
-        var Red:CGFloat = 1.0
-        var Green:CGFloat = 1.0
-        var Blue:CGFloat = 1.0
-        var Alpha:CGFloat = 1.0
+    struct ColorSet {
+        var Red:CGFloat     = 1.0
+        var Green:CGFloat   = 1.0
+        var Blue:CGFloat    = 1.0
+        var Alpha:CGFloat   = 1.0
+        func now() -> UIColor{
+            return UIColor(red: Red, green: Green, blue: Blue, alpha: Alpha)
+        }
     }
     
-    var _newColor = Color()
+    struct AcceleSet {
+        var Up      = ColorSet()
+        var Down    = ColorSet()
+        var Letf    = ColorSet()
+        var Right   = ColorSet()
+    }
+    
+    var ColorPuriset = [AcceleSet]()
+    
+
+    
+    //----------------------------------------------------
     
     @IBAction func action_ColorChange(sender: UIButton) {
         switch sender.tag {
         case 0,1,2,3,4:
-            print("")
+            //テーブルビューにセット
+            self.tableView.reloadData()
         default:
             print("No matching Button")
             
@@ -65,13 +76,16 @@ class ViewController: UIViewController ,UITableViewDelegate{
         
     }
     
-    @IBAction func actionSW_Gravity(sender: UISwitch) {
+    @IBAction func action_ZeroGravity(sender: UISwitch) {
         if sender.on {
-            print("スイッチ　オン")
+            //重力カット
         }else{
-            print("スイッチ　オフ")
+            //重力あり
+            
         }
+        
     }
+    
     //MARK: -
     //MARK: table view setting
     let settingList = ["Red","Green","Blue","Alpha"]
@@ -107,42 +121,43 @@ class ViewController: UIViewController ,UITableViewDelegate{
         sw.addTarget(self, action: "onClickMySwicth:", forControlEvents: UIControlEvents.ValueChanged)
         return sw
     }
+    
+    
     //MARK: switch event
     func onClickMySwicth(sender:UISwitch){
         print(__FUNCTION__)
         
-        
-        var value:CGFloat = 0.0
+ //       var value:CGFloat = 0.0
         
         if sender.on  {
             print("スイッチNo." + String(sender.tag) + " ON")
-            value = 1.0
+//            value = 1.0
         }else{
             print("スイッチNo." + String(sender.tag) + " OFF")
         }
         
         
         
-        switch sender.tag {
-        case 0:
-            _newColor.Red = value
-        case 1:
-            _newColor.Green = value
-        case 2:
-            _newColor.Blue = value
-        case 3:
-            _newColor.Alpha = value
-        default:
-            print("変更なし")
-            
-        }
+//        switch sender.tag {
+//        case 0:
+//            _newColor.Red = value
+//        case 1:
+//            _newColor.Green = value
+//        case 2:
+//            _newColor.Blue = value
+//        case 3:
+//            _newColor.Alpha = value
+//        default:
+//            print("変更なし")
+//            
+//        }
         
         
-        self.chenge_BackGroundColer()
+ //       self.chenge_BackGroundColer()
     }
     
     func chenge_BackGroundColer(){
-        self.view.backgroundColor = UIColor(red:_newColor.Red , green: _newColor.Green, blue: _newColor.Blue, alpha: _newColor.Alpha)
+//        self.view.backgroundColor = UIColor(red:_newColor.Red , green: _newColor.Green, blue: _newColor.Blue, alpha: _newColor.Alpha)
     }
     
     
@@ -182,8 +197,6 @@ class ViewController: UIViewController ,UITableViewDelegate{
     //    }
     
     func changeColor(){
-        
-        
         
         func directionCheck(){
             //X方向
