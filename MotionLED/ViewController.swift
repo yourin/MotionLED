@@ -20,6 +20,7 @@ class ViewController: UIViewController ,UITableViewDelegate{
     
     @IBOutlet weak var label_demoScreen: UILabel!
     
+    @IBOutlet weak var sw_ZeroGravity: UISwitch!
     //MARK:定数
     let FILTERING_FACTOR: Float = 0.1
     
@@ -79,9 +80,10 @@ class ViewController: UIViewController ,UITableViewDelegate{
     @IBAction func action_ZeroGravity(sender: UISwitch) {
         if sender.on {
             //重力カット
+            NSLog("重力カットする")
         }else{
             //重力あり
-            
+            NSLog("重力あり")
         }
         
     }
@@ -267,6 +269,12 @@ class ViewController: UIViewController ,UITableViewDelegate{
         _aZ = (Float(gravity.z)*FILTERING_FACTOR) + (_aZ*(1.0-FILTERING_FACTOR))
         
         //重力カット
+        if self.sw_ZeroGravity.on {
+         //Y軸に補正を掛ける
+            
+        }
+            
+        
         
         
         //        print("X軸加速度:%+.2f\n", _aX)

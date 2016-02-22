@@ -198,6 +198,7 @@
                         <outlet property="label2" destination="UEW-8V-JwX" id="Aed-7F-u4m"/>
                         <outlet property="label3" destination="AFt-IW-DhP" id="RPZ-nS-GC8"/>
                         <outlet property="label_demoScreen" destination="wJL-YJ-9ef" id="naA-hP-2oh"/>
+                        <outlet property="sw_ZeroGravity" destination="Gx0-ch-WlX" id="H0t-vJ-d7a"/>
                         <outlet property="tableView" destination="cUL-fy-jbY" id="fJ2-lb-9B0"/>
                     </connections>
                 </viewController>
