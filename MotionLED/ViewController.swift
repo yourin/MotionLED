@@ -51,15 +51,17 @@ class ViewController: UIViewController ,UITableViewDelegate{
             return UIColor(red: Red, green: Green, blue: Blue, alpha: Alpha)
         }
     }
+    var _colorSet = [ColorSet]()
     
-    struct AcceleSet {
+    struct MovingColor {
         var Up      = ColorSet()
         var Down    = ColorSet()
         var Letf    = ColorSet()
         var Right   = ColorSet()
+        var Stop   = ColorSet()
     }
     
-    var ColorPuriset = [AcceleSet]()
+    var _originalColorPreset = [MovingColor]()
     
 
     
@@ -167,6 +169,8 @@ class ViewController: UIViewController ,UITableViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         print(self.view.frame.size)
+        
+        
         //センサー情報の通知の開始(1)
         _motionManager = CMMotionManager()
         _motionManager!.deviceMotionUpdateInterval = 1.0/60.0
@@ -183,6 +187,69 @@ class ViewController: UIViewController ,UITableViewDelegate{
         //            name: UIDeviceOrientationDidChangeNotification,
         //            object: nil)
         
+        
+        //MARK:NSUserDefault
+        //プリセットを用意
+        if _originalColorPreset.count == 0 {
+            //プリセットを準備する
+           self.firstPreiset()
+            
+            
+            
+        }
+        //設定に反映させる
+    
+        
+    }
+    
+    func firstPreiset(){
+        
+        func color(){
+            
+        
+        var colset = ColorSet()
+
+        let white = colset
+
+        colset.Red = 0.0
+        colset.Green = 0.0
+        colset.Blue = 0.0
+        colset.Alpha = 1.0
+        let black = colset
+        
+        colset.Red = 1.0
+        let red = colset
+        
+        colset.Green = 1.0
+        let color_RG = colset
+
+        colset.Red = 0.0
+//        colset.Green = 1.0
+        let green = colset
+        
+        colset.Blue = 1.0
+        let color_GB = colset
+
+        colset.Green = 0.0
+        let blue = colset
+        
+        colset.Red = 1.0
+        let color_RB = colset
+
+        _colorSet = [black,white,red,green,blue,color_RG,color_GB,color_RB]
+        }
+        
+        func moving(){
+        
+            var movingColor = MovingColor()
+            movingColor.Stop = _colorSet[0]
+            movingColor.Up = _colorSet[1]
+            movingColor.Down = _colorSet[3]
+            movingColor.Letf = _colorSet[2]
+            movingColor.Right = _colorSet[3]
+            
+            _originalColorPreset.append(movingColor)
+        }
     }
     
     //ラベルの生成
