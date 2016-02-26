@@ -24,6 +24,9 @@ class ViewController: UIViewController ,UITableViewDelegate{
     //MARK:定数
     let FILTERING_FACTOR: Float = 0.1
     
+    //MARK:変数 設定用
+    var _proMode = false
+    
     //MARK:変数
     var _motionManager: CMMotionManager?
     var _label: UILabel?
@@ -100,31 +103,61 @@ class ViewController: UIViewController ,UITableViewDelegate{
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "cell")
         print(cell.frame.size)
-        let label = self.make_Label(settingList[indexPath.row],size:cell.frame.size)
+        
+        
+        // ラベル　作成
+        func make_Label(string:String,size:CGSize) -> UILabel{
+            let label = UILabel()
+            label.frame = CGRect(x:0 , y: 0, width:size.width , height: size.height)
+            label.text = string
+            return label
+        }
+        // スイッチ作成
+        func make_Switch(tag:Int) -> UISwitch{
+            let sw = UISwitch()
+            sw.tag = tag
+            sw.on = true
+            // SwitchのOn/Off切り替わりの際に、呼ばれるイベントを設定する.
+            sw.addTarget(self, action: "onClickMySwicth:", forControlEvents: UIControlEvents.ValueChanged)
+            return sw
+        }
+        
+//        func make_Switch(tag:Int,swOn:Bool) -> UISwitch{
+//            let sw = UISwitch()
+//            sw.tag = tag
+//            if swOn{
+//                sw.on = true
+//            }else{
+//                sw.on = false
+//            }
+//            // SwitchのOn/Off切り替わりの際に、呼ばれるイベントを設定する.
+//            sw.addTarget(self, action: "onClickMySwicth:", forControlEvents: UIControlEvents.ValueChanged)
+//            return sw
+//        }
+        
+        func make_Slider(tag:Int){
+            let slider = UISlider()
+            
+        }
+        
+        let label = make_Label(settingList[indexPath.row],size:cell.frame.size)
         label.frame.origin = CGPoint(x: 160, y: 0)
         cell.addSubview(label)
         
-        let sw = make_Switch(indexPath.row)
-        sw.frame.origin = CGPoint(x: 0, y: 0)
-        cell.addSubview(sw)
-        return cell
+        if _proMode {
+            let slider = make_Slider(indexPath.row)
+            
+        }else{
+            
+            let sw = make_Switch(indexPath.row)
+            let swPosY = (cell.frame.size.height - sw.frame.size.height) / 2
+            sw.frame.origin = CGPoint(x: 0, y: swPosY)
+            cell.addSubview(sw)
+        }
+            return cell
     }
-    // ラベル　作成
-    func make_Label(string:String,size:CGSize) -> UILabel{
-        let label = UILabel()
-        label.frame = CGRect(x:0 , y: 0, width:size.width , height: size.height)
-        label.text = string
-        return label
-    }
-    // スイッチ作成
-    func make_Switch(tag:Int) -> UISwitch{
-        let sw = UISwitch()
-        sw.tag = tag
-        sw.on = true
-        // SwitchのOn/Off切り替わりの際に、呼ばれるイベントを設定する.
-        sw.addTarget(self, action: "onClickMySwicth:", forControlEvents: UIControlEvents.ValueChanged)
-        return sw
-    }
+
+
     
     
     //MARK: switch event
@@ -198,6 +231,8 @@ class ViewController: UIViewController ,UITableViewDelegate{
             
         }
         //設定に反映させる
+        
+        //ユーザーデフォルトに保存
     
         
     }
@@ -206,47 +241,47 @@ class ViewController: UIViewController ,UITableViewDelegate{
         
         func color(){
             
-        
-        var colset = ColorSet()
-
-        let white = colset
-
-        colset.Red = 0.0
-        colset.Green = 0.0
-        colset.Blue = 0.0
-        colset.Alpha = 1.0
-        let black = colset
-        
-        colset.Red = 1.0
-        let red = colset
-        
-        colset.Green = 1.0
-        let color_RG = colset
-
-        colset.Red = 0.0
-//        colset.Green = 1.0
-        let green = colset
-        
-        colset.Blue = 1.0
-        let color_GB = colset
-
-        colset.Green = 0.0
-        let blue = colset
-        
-        colset.Red = 1.0
-        let color_RB = colset
-
-        _colorSet = [black,white,red,green,blue,color_RG,color_GB,color_RB]
+            
+            var colset = ColorSet()
+            
+            let white = colset
+            
+            colset.Red = 0.0
+            colset.Green = 0.0
+            colset.Blue = 0.0
+            colset.Alpha = 1.0
+            let black = colset
+            
+            colset.Red = 1.0
+            let red = colset
+            
+            colset.Green = 1.0
+            let color_RG = colset
+            
+            colset.Red = 0.0
+            //        colset.Green = 1.0
+            let green = colset
+            
+            colset.Blue = 1.0
+            let color_GB = colset
+            
+            colset.Green = 0.0
+            let blue = colset
+            
+            colset.Red = 1.0
+            let color_RB = colset
+            
+            _colorSet = [black,white,red,green,blue,color_RG,color_GB,color_RB]
         }
         
         func moving(){
         
             var movingColor = MovingColor()
-            movingColor.Stop = _colorSet[0]
-            movingColor.Up = _colorSet[1]
-            movingColor.Down = _colorSet[3]
-            movingColor.Letf = _colorSet[2]
-            movingColor.Right = _colorSet[3]
+            movingColor.Stop    = _colorSet[0]
+            movingColor.Up      = _colorSet[1]
+            movingColor.Down    = _colorSet[3]
+            movingColor.Letf    = _colorSet[2]
+            movingColor.Right   = _colorSet[4]
             
             _originalColorPreset.append(movingColor)
         }
@@ -269,13 +304,18 @@ class ViewController: UIViewController ,UITableViewDelegate{
         
         func directionCheck(){
             //X方向
+            var r:Float = 0.0
             if _aX < -0.1 {
-                let r:Float = _aX * -1.0
-                self.changeColorRed(r)
+                r = _aX * -1.0
+                print("Left Move")
             }else if _aX > 0.1 {
-                let r:Float = _aX
-                self.changeColorRed(r)
+                r = _aX
+                print("Right Move")
             }
+            
+            self.changeColorRed(r)
+            
+            
             //Y方向
             if _aY < -0.1 {
                 
@@ -284,9 +324,9 @@ class ViewController: UIViewController ,UITableViewDelegate{
             }
             //Y方向
             if _aZ < -0.1 {
-                
+                print("back move")
             }else if _aZ > 0.1 {
-                
+                print("front move")
             }
         }
         //軸にたいしての色設定
