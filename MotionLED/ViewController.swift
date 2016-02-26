@@ -207,6 +207,7 @@ class ViewController: UIViewController ,UITableViewDelegate{
         //センサー情報の通知の開始(1)
         _motionManager = CMMotionManager()
         _motionManager!.deviceMotionUpdateInterval = 1.0/60.0
+        
         _motionManager?.startDeviceMotionUpdatesToQueue(
             NSOperationQueue.currentQueue()!,
             withHandler: {(motion, error) in
