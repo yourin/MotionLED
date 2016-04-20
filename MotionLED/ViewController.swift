@@ -26,6 +26,7 @@ class ViewController: UIViewController ,UITableViewDelegate{
     
     //MARK:変数
     var _motionManager: CMMotionManager?
+    var _updateTime:NSTimeInterval! = 1.0/100.0
     var _label: UILabel?
     var _aX: Float = 0
     var _aY: Float = 0
@@ -60,12 +61,80 @@ class ViewController: UIViewController ,UITableViewDelegate{
         var Right   = ColorSet()
         var Stop   = ColorSet()
     }
-    
     var _originalColorPreset = [MovingColor]()
     
+    
+    
+    
+    var _defaults = NSUserDefaults.standardUserDefaults()
+    let _dic_Preset = [String:AnyObject]()
 
     
     //----------------------------------------------------
+    //MARK:- ロード完了時に呼ばれる
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        print(self.view.frame.size)
+        
+        //センサー情報の通知の開始(1)
+        _motionManager = CMMotionManager()
+        //初期設定値
+        _motionManager!.deviceMotionUpdateInterval = _updateTime
+        
+        _motionManager?.startDeviceMotionUpdatesToQueue(
+            NSOperationQueue.currentQueue()!,
+            withHandler: {(motion, error) in
+                self.updateMotion(motion!)
+        })
+        
+        //設定をよみこみ
+        self.load_Setting()
+        self.load_Preset()
+        
+        
+    }
+    
+    
+    //MARK:NSUserDefaults
+
+    func load_Setting(){
+        if ((_defaults.objectForKey("SETTING")) != nil){
+            
+//            if _originalColorPreset.count == 0 {
+//                //プリセットがなにもない
+//                //プリセットを準備する
+//                self.firstPreiset()
+//            }
+            
+        }
+        
+    }
+    
+    
+    func load_Preset(){
+        if ((_defaults.objectForKey("PRESET_COLOR")) != nil){
+            
+            if _originalColorPreset.count == 0 {
+                //プリセットがなにもない
+                //プリセットを準備する
+                self.firstPreiset()
+//                _defaults.setObject(_dic_Preset, forKey: "preset")
+//                _defaults.setObject(_originalColorPreset, forKey: "q")
+                
+//                    _originalColorPreset, forKey: "PRESET_COLOR")
+            }
+            
+        }
+    }
+    
+    func seve_Setting(){
+        
+    }
+    
+    func save_Preset(){
+        
+    }
+
     
     @IBAction func action_ColorChange(sender: UIButton) {
         switch sender.tag {
@@ -165,83 +234,45 @@ class ViewController: UIViewController ,UITableViewDelegate{
     }
     
     
-    //MARK:ロード完了時に呼ばれる
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print(self.view.frame.size)
-        
-        
-        //センサー情報の通知の開始(1)
-        _motionManager = CMMotionManager()
-        _motionManager!.deviceMotionUpdateInterval = 1.0/60.0
-        
-        _motionManager?.startDeviceMotionUpdatesToQueue(
-            NSOperationQueue.currentQueue()!,
-            withHandler: {(motion, error) in
-                self.updateMotion(motion!)
-        })
-        
-        //端末の向き通知の開始(5)
-        //        UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
-        //        NSNotificationCenter.defaultCenter().addObserver(self,
-        //            selector: "didRotate:",
-        //            name: UIDeviceOrientationDidChangeNotification,
-        //            object: nil)
-        
-        
-        //MARK:NSUserDefault
-        //プリセットを用意
-        if _originalColorPreset.count == 0 {
-            //プリセットを準備する
-           self.firstPreiset()
-            
-            
-            
-        }
-        //設定に反映させる
-    
-        
-    }
     
     func firstPreiset(){
         
         func color(){
             
-        
-        var colset = ColorSet()
-
-        let white = colset
-
-        colset.Red = 0.0
-        colset.Green = 0.0
-        colset.Blue = 0.0
-        colset.Alpha = 1.0
-        let black = colset
-        
-        colset.Red = 1.0
-        let red = colset
-        
-        colset.Green = 1.0
-        let color_RG = colset
-
-        colset.Red = 0.0
-//        colset.Green = 1.0
-        let green = colset
-        
-        colset.Blue = 1.0
-        let color_GB = colset
-
-        colset.Green = 0.0
-        let blue = colset
-        
-        colset.Red = 1.0
-        let color_RB = colset
-
-        _colorSet = [black,white,red,green,blue,color_RG,color_GB,color_RB]
+            var colset = ColorSet()
+            
+            let white = colset
+            
+            colset.Red = 0.0
+            colset.Green = 0.0
+            colset.Blue = 0.0
+            colset.Alpha = 1.0
+            let black = colset
+            
+            colset.Red = 1.0
+            let red = colset
+            
+            colset.Green = 1.0
+            let color_RG = colset
+            
+            colset.Red = 0.0
+            //        colset.Green = 1.0
+            let green = colset
+            
+            colset.Blue = 1.0
+            let color_GB = colset
+            
+            colset.Green = 0.0
+            let blue = colset
+            
+            colset.Red = 1.0
+            let color_RB = colset
+            
+            _colorSet = [black,white,red,green,blue,color_RG,color_GB,color_RB]
         }
         
         func moving(){
-        
+            
             var movingColor = MovingColor()
             movingColor.Stop = _colorSet[0]
             movingColor.Up = _colorSet[1]
@@ -324,7 +355,6 @@ class ViewController: UIViewController ,UITableViewDelegate{
     
     //モーション通知時の処理
     func updateMotion(motion: CMDeviceMotion) {
-        //        let str = NSMutableString()
         
         //端末の加速度の取得(2)
         let gravity = motion.gravity
@@ -337,7 +367,7 @@ class ViewController: UIViewController ,UITableViewDelegate{
         _aZ = (Float(gravity.z)*FILTERING_FACTOR) + (_aZ*(1.0-FILTERING_FACTOR))
         
         //重力カット
-        if self.sw_ZeroGravity.on {
+        if self.sw_ZeroGravity.on{
          //Y軸に補正を掛ける
             
         }

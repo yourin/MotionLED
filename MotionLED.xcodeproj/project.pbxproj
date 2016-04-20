@@ -14,6 +14,7 @@
 		3DD15DDC1C6E5F5200593A0D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DD15DDB1C6E5F5200593A0D /* CoreMotion.framework */; };
 		3DD15DDE1C77D53500593A0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DD15DDD1C77D53500593A0D /* Main.storyboard */; };
 		3DD15DE01C7FA64F00593A0D /* BatteryChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD15DDF1C7FA64F00593A0D /* BatteryChecker.swift */; };
+		3DD15DE21C8CD23300593A0D /* ColorMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD15DE11C8CD23300593A0D /* ColorMaker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		3DD15DDB1C6E5F5200593A0D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		3DD15DDD1C77D53500593A0D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3DD15DDF1C7FA64F00593A0D /* BatteryChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatteryChecker.swift; sourceTree = "<group>"; };
+		3DD15DE11C8CD23300593A0D /* ColorMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorMaker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			children = (
 				3DD15DC91C6E5F0600593A0D /* AppDelegate.swift */,
 				3DD15DCB1C6E5F0600593A0D /* ViewController.swift */,
+				3DD15DE11C8CD23300593A0D /* ColorMaker.swift */,
 				3DD15DDF1C7FA64F00593A0D /* BatteryChecker.swift */,
 				3DD15DDD1C77D53500593A0D /* Main.storyboard */,
 				3DD15DD01C6E5F0600593A0D /* Assets.xcassets */,
@@ -145,6 +148,7 @@
 			files = (
 				3DD15DE01C7FA64F00593A0D /* BatteryChecker.swift in Sources */,
 				3DD15DCC1C6E5F0600593A0D /* ViewController.swift in Sources */,
+				3DD15DE21C8CD23300593A0D /* ColorMaker.swift in Sources */,
 				3DD15DCA1C6E5F0600593A0D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
